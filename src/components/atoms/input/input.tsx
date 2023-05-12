@@ -10,14 +10,14 @@ export interface InputProps {
 }
 export const Input:FC<InputProps>=({ value="", errorMessage, onChange, placeholder="" }) => {
     return (
-        <div className="input-wrapper">
+        <div className="input input__wrapper">
             <input 
-                className={`input-wrapper__field ${errorMessage ? "input-wrapper__field--error":""}`}
+                className={`input input__wrapper__field ${errorMessage ? "input__wrapper__field--error":""}`}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
             />
-            {errorMessage && <span className="input-wrapper__message-error">{errorMessage}</span>}
+            {errorMessage && <span className="input__wrapper__message-error">{errorMessage}</span>}
         </div>
     )
 }

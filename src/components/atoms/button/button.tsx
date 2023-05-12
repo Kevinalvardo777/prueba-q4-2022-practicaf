@@ -3,7 +3,7 @@ import "./button.scss";
 
 interface ButtonProps extends PropsWithChildren {
   size?: "small" | "medium";
-  type?: "primary" | "secondary";
+  type?: "primary" | "secondary" | "circular";
   onClick: VoidFunction;
 }
 
@@ -14,7 +14,7 @@ export const Button: FC<ButtonProps> = ({
   onClick,
 }) => {
   return (
-    <button className={`btn btn--${size} btn--${type}`} onClick={onClick}>
+    <button aria-label={`${type}-button`} className={`btn btn--${size} btn--${type}`} onClick={onClick}>
       {children}
     </button>
   );

@@ -6,7 +6,7 @@ describe("Button Tests", () => {
   it("should render medium button by default", () => {
     render(<Button onClick={() => {}}>Medium</Button>);
 
-    const button = screen.getByRole("button", { name: "Medium" });
+    const button = screen.getByRole("button", { name: "primary-button" });
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass("btn--medium");
@@ -18,7 +18,7 @@ describe("Button Tests", () => {
         Small
       </Button>
     );
-    const button = screen.getByRole("button", { name: "Small" });
+    const button = screen.getByRole("button", { name: "primary-button" });
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass("btn--small");
@@ -27,7 +27,7 @@ describe("Button Tests", () => {
   it("should render primary button by default", () => {
     render(<Button onClick={() => {}}>Primary</Button>);
 
-    const button = screen.getByRole("button", { name: "Primary" });
+    const button = screen.getByRole("button", { name: "primary-button" });
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass("btn--primary");
@@ -39,10 +39,22 @@ describe("Button Tests", () => {
         Secondary
       </Button>
     );
-    const button = screen.getByRole("button", { name: "Secondary" });
+    const button = screen.getByRole("button", { name: "secondary-button" });
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass("btn--secondary");
+  });
+
+  it("should render circular button", () => {
+    render(
+      <Button type="circular" onClick={() => {}}>
+        Secondary
+      </Button>
+    );
+    const button = screen.getByRole("button", { name: "circular-button"});
+
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass("btn--circular");
   });
 
   it("should execute received callback", async () => {
@@ -54,7 +66,7 @@ describe("Button Tests", () => {
       </Button>
     );
 
-    const button = screen.getByRole("button", { name: "Medium" });
+    const button = screen.getByRole("button", { name: "primary-button" });
     expect(button).toBeInTheDocument();
 
     await user.click(button);
