@@ -1,7 +1,8 @@
 .btn {
   border-radius: 7px;
   height: auto;
-  
+  cursor: pointer;
+
   &--small {
     width: 70px;
     font-size: medium;
@@ -11,7 +12,7 @@
   &--medium {
     width: 60%;
     font-size: x-large;
-    padding: 15px;
+    padding: auto;
   }
 
   &--primary {
@@ -26,12 +27,13 @@
     color: var(--main);
   }
 
-  &--circular{
+  &--circular {
     display: flex;
     border-radius: 50%;
     background-color: var(--main);
     width: fit-content;
-    border: none; 
+    border: none;
+    padding: 0;
     // height: fit-content;
   }
 }

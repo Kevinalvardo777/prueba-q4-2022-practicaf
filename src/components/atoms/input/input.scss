@@ -1,33 +1,32 @@
 .input {
-    &__wrapper
-    {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        padding: 1rem 0.5rem;
-        
-        &__field{
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 0 0.5rem;
+    height: 100%;
 
-            color: black;
-            border: 1px solid lightgray;
-            font-size: 20px;
-            font-weight: 500;
-            border-radius: 4px;
-            padding: 2px;
-            
-            ::placeholder {
-                color: gray;
-            }
+    &__field {
+      color: black;
+      border: 1px solid lightgray;
+      font-size: 20px;
+      font-weight: 500;
+      border-radius: 4px;
+      padding: 10px;
+      height: 100%;
 
-            &--error{
-                border: 1px solid red;
-            }
+      ::placeholder {
+        color: gray;
+      }
 
-        }
-
-        &__message-error {
-            color: red;
-        }
+      &--error {
+        border: 1px solid red;
+      }
     }
+
+    &__message-error {
+      color: red;
+    }
+  }
 }

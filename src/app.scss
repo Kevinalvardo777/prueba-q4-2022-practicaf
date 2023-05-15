@@ -1,6 +1,7 @@
 .app {
-  max-width: 1024px;
-  margin: auto;
+  // max-width: 1024px;
+  margin: 0;
+  padding: 0;
 
   &__color-container {
     display: flex;
@@ -9,14 +10,14 @@
   }
 
   &__color-title {
-    min-width: 70px
+    min-width: 70px;
   }
 
   &__color {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin: 0px 20px;
+    // width: 30px;
+    // height: 30px;
+    // border-radius: 50%;
+    // margin: 0px 20px;
 
     &--main {
       background-color: var(--main);

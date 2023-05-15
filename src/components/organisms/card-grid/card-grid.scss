@@ -1,0 +1,14 @@
+.card-grid {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__grid {
+    display: grid;
+    padding: 0 20px;
+    grid-gap: 20px;
+    max-width: 75vw;
+    margin: 20px auto;
+    grid-template-columns: repeat(auto-fit, 300px);
+  }
+}
