@@ -2,6 +2,8 @@ import { AddGif } from "./components/molecules/add-gif/add-gif";
 import { CardGrid } from "./components/organisms/card-grid/card-grid";
 
 import "./app.scss";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const gifs = [
   {
@@ -46,12 +48,17 @@ const gifs = [
   },
 ];
 
+const client = new QueryClient();
+
 const App = () => {
   return (
-    <div className="app app__color--background">
-      <AddGif />
-      <CardGrid gifs={gifs} />
-    </div>
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools />
+      <div className="app app__color--background">
+        <AddGif />
+        <CardGrid gifs={gifs} />
+      </div>
+    </QueryClientProvider>
   );
 };
 
