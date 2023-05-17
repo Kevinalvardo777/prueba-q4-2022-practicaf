@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "../../../test-utils/test-utils";
+import { render, screen, waitFor } from "../../../utils/test-utils/test-utils";
 import { AddGif } from "./add-gif";
 import userEvent from "@testing-library/user-event";
 import { server } from "../../../mocks/server";
 import { rest } from "msw";
-import { gifApiEndpoints } from "../../../api/gif-api";
+import { ADD_GIF_SERVICE } from "../../../utils/constants/services-constants";
 
 describe.only("Add Gif Component", () => {
   it("should handle successful gif added and clear input", async () => {
@@ -30,7 +30,6 @@ describe.only("Add Gif Component", () => {
 
     const input = screen.getByPlaceholderText(/gift url/i);
     await user.type(input, url);
-    console.log("typed");
     expect(input).toHaveValue(url);
 
     const addBtn = screen.getByText("Agregar");
@@ -44,7 +43,7 @@ describe.only("Add Gif Component", () => {
 
   it("should handle failed gif added", async () => {
     server.resetHandlers(
-      rest.post(gifApiEndpoints.addGif, (req, res, ctx) => res(ctx.status(500)))
+      rest.post(ADD_GIF_SERVICE, (_, res, ctx) => res(ctx.status(500)))
     );
 
     const url = "http://www.mygif.com";
@@ -53,8 +52,6 @@ describe.only("Add Gif Component", () => {
 
     const input = screen.getByPlaceholderText(/gift url/i);
     await user.type(input, url);
-
-    console.log("typed: ", url);
 
     expect(input).toHaveValue(url);
 

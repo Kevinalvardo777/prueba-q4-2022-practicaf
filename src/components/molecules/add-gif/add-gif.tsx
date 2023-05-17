@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Input } from "../../atoms/input/input";
 import { Button } from "../../atoms/button/button";
 import { useAddGif } from "./use-add-gif/use-add-gif";

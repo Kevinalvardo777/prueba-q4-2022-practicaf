@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, FC } from "react";
 import "./card-grid.scss";
-import { Gif } from "../../../interfaces/gif";
+import { Gif } from "../../../utils/interfaces/gif";
 import { GifCard } from "../../molecules/gif-card/gif-card";
 
 interface CardGridProps extends PropsWithChildren {

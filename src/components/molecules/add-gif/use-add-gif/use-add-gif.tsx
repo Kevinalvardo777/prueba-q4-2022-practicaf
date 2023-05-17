@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Gif } from "../../../../interfaces/gif";
-import {
-  axiosController,
-  createGif,
-  gifApiEndpoints,
-} from "../../../../api/gif-api";
+import { createGif } from "../../../../services/gif-service/gif-service";
 
 export const useAddGif = () => {
   const [inputValue, setInputValue] = useState("");
@@ -28,11 +23,7 @@ export const useAddGif = () => {
   }, [error]);
 
   useEffect(() => {
-    if (data) {
-      console.log("limpiar campo");
-      setInputValue("");
-    }
-
+    if (data) setInputValue("");
     return () => remove();
   }, [data]);
 
@@ -52,6 +43,6 @@ export const useAddGif = () => {
     handleSubmit,
     inputValue,
     errorMessage,
-    isLoading: isFetching || isFetching,
+    isLoading: isFetching || isLoading,
   };
 };

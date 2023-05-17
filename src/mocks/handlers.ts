@@ -1,9 +1,13 @@
 import { rest } from "msw";
-import { Gif } from "../interfaces/gif";
-import { gifApiEndpoints } from "../api/gif-api";
+import { Gif } from "../utils/interfaces/gif";
+import {
+  ADD_GIF_SERVICE,
+  DELETE_GIF_SERVICE,
+  GET_GIFS_SERVICE,
+} from "../utils/constants/services-constants";
 
 export const handlers = [
-  rest.get(process.env.API_URL || "", (req, res, ctx) => {
+  rest.get(GET_GIFS_SERVICE, (_, res, ctx) => {
     // req.url.searchParams
     return res(
       ctx.json([
@@ -21,10 +25,8 @@ export const handlers = [
     );
   }),
 
-  rest.post(gifApiEndpoints.addGif || "", async (req, res, ctx) => {
+  rest.post(ADD_GIF_SERVICE, async (req, res, ctx) => {
     const { url, author_id }: Gif = (await req.json()) as Gif;
-
-    console.log("LLEGA");
 
     return res(
       ctx.json({
@@ -35,7 +37,7 @@ export const handlers = [
     );
   }),
 
-  rest.delete(gifApiEndpoints.deleteGif || "", async (req, res, ctx) => {
+  rest.delete(DELETE_GIF_SERVICE, async (req, res, ctx) => {
     const { url, author_id }: Gif = (await req.json()) as Gif;
 
     return res(

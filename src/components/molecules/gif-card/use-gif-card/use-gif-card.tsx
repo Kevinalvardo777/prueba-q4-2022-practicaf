@@ -1,17 +1,16 @@
-import { useState } from "react"
+import { useState } from "react";
 
-export const useGifCard = ()=>{
+export const useGifCard = () => {
+  const [showDeleteOptions, setShowDeleteOptions] = useState(false);
 
-    const [showDeleteOptions, setShowDeleteOptions] = useState(false)
+  const handleToggleDeleteOptions = () => {
+    setShowDeleteOptions((oldValue) => !oldValue);
+  };
 
-    const handleToggleDeleteOptions = ()=>{
-        setShowDeleteOptions((oldValue)=>!oldValue)
-    }
+  const handleDelete = () => {
+    // TODO: EJECUTAR PETICION ELIMINAR
+    // console.log("ELIMINAR")
+  };
 
-    const handleDelete = ()=>{
-        // TODO: EJECUTAR PETICION ELIMINAR
-        console.log("ELIMINAR")
-    }
-
-    return {showDeleteOptions, handleDelete, handleToggleDeleteOptions }
-}
+  return { showDeleteOptions, handleDelete, handleToggleDeleteOptions };
+};

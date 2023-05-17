@@ -56,7 +56,10 @@
       "!src/**/*.{interfaces,styles,d}.{ts,tsx}",
       "!src/index.tsx",
       "!src/reportWebVitals.ts",
-      "!src/utils/interfaces/*"
+      "!src/utils/interfaces/*",
+      "!src/utils/constants/*",
+      "!src/utils/test-utils/*",
+      "!src/mocks/*"
     ],
     "coveragePathIgnorePatterns": []
   }
