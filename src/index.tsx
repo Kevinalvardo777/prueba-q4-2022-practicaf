@@ -5,10 +5,23 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./index.scss";
 import App from "./App";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const AppWithProviders = () => {
+  const client = new QueryClient();
+
+  return (
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools />
+      <App />
+    </QueryClientProvider>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppWithProviders />
   </React.StrictMode>,
   document.getElementById("root")
 );

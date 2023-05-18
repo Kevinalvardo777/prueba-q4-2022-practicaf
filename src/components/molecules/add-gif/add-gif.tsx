@@ -2,9 +2,17 @@ import { Input } from "../../atoms/input/input";
 import { Button } from "../../atoms/button/button";
 import { useAddGif } from "./use-add-gif/use-add-gif";
 import "./add-gif.scss";
+import { FC, PropsWithChildren } from "react";
+import { Gif } from "../../../utils/interfaces/gif";
 
-export const AddGif = () => {
-  const { onChange, handleSubmit, inputValue, errorMessage } = useAddGif();
+interface AddGifProps extends PropsWithChildren {
+  refetch: () => void;
+}
+
+export const AddGif: FC<AddGifProps> = ({ refetch: refetchGifs }) => {
+  const { onChange, handleSubmit, inputValue, errorMessage } = useAddGif({
+    refetchGifs,
+  });
 
   return (
     <div className="add-gif add-gif__wrapper">

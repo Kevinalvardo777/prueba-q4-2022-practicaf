@@ -1,17 +1,20 @@
-import React, { PropsWithChildren, FC } from "react";
+import React, { PropsWithChildren, FC, useEffect } from "react";
 import "./card-grid.scss";
-import { Gif } from "../../../utils/interfaces/gif";
 import { GifCard } from "../../molecules/gif-card/gif-card";
+import { Gif } from "../../../utils/interfaces/gif";
 
 interface CardGridProps extends PropsWithChildren {
-  gifs: Gif[];
+  gifs: Gif[] | undefined;
+  error: any;
 }
 
-export const CardGrid: FC<CardGridProps> = ({ gifs }) => {
+export const CardGrid: FC<CardGridProps> = ({ gifs, error }) => {
+  if (error) return <div> Error al cargar los gifs </div>;
+
   return (
     <div className="card-grid card-grid__wrapper">
       <div className="card-grip card-grid__grid">
-        {gifs.map(({ id, url }) => (
+        {gifs?.map(({ id, url }) => (
           <GifCard id={id} url={url} key={id} />
         ))}
       </div>

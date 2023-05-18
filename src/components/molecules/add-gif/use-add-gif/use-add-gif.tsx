@@ -2,7 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { createGif } from "../../../../services/gif-service/gif-service";
 
-export const useAddGif = () => {
+interface useAddGifProps {
+  refetchGifs: () => void;
+}
+
+export const useAddGif = ({ refetchGifs }: useAddGifProps) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const urlRegex =
@@ -11,20 +15,20 @@ export const useAddGif = () => {
   const { isLoading, error, data, isFetching, refetch, remove } = useQuery(
     ["addGif", inputValue],
     () => createGif({ url: inputValue }),
-    {
-      refetchOnWindowFocus: false,
-      enabled: false, // no se ejecuta por defecto
-    }
+    { enabled: false, refetchOnWindowFocus: false }
   );
 
   useEffect(() => {
     if (error) setErrorMessage("No fue posible agregar el gif");
-    return () => remove();
+    return remove();
   }, [error]);
 
   useEffect(() => {
-    if (data) setInputValue("");
-    return () => remove();
+    if (data) {
+      setInputValue("");
+      refetchGifs();
+    }
+    return remove();
   }, [data]);
 
   const handleSubmit = async () => {

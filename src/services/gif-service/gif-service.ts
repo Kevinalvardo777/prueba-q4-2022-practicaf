@@ -7,7 +7,7 @@ import {
 } from "../../utils/constants/services-constants";
 import { gifService } from "./gif-service-axios-config";
 
-export const getGifs = () =>
+export const fetchGifs = () =>
   gifService
     .get<Gif[]>(
       `${GET_GIFS_SERVICE}?author_id=${process.env.REACT_APP_AUTHOR_ID}`
