@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div className="app app__color--background">
       <AddGif refetch={refetch} />
-      <CardGrid error={error} gifs={gifs} />
+      <CardGrid error={error} gifs={gifs} refetch={refetch}/>
     </div>
   );
 };

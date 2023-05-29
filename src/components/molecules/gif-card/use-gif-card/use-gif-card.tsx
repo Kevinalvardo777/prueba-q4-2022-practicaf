@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { deleteGif } from "../../../../services/gif-service/gif-service";
 
-export const useGifCard = () => {
+  interface UseGifCardProps {
+    id: number, 
+    url: string, 
+    refetchGifs: () => void
+  }
+
+export const useGifCard = ({id, url, refetchGifs}: UseGifCardProps) => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(false);
 
   const handleToggleDeleteOptions = () => {
     setShowDeleteOptions((oldValue) => !oldValue);
   };
 
-  const handleDelete = () => {
-    // TODO: EJECUTAR PETICION ELIMINAR
-    // console.log("ELIMINAR")
-  };
+  const { isLoading, error, data, isFetching, refetch, remove } = useQuery(
+    ["deleteGif", id, url],
+    () => deleteGif({ id, url }),
+    { enabled: false, refetchOnWindowFocus: false }
+  );
 
-  return { showDeleteOptions, handleDelete, handleToggleDeleteOptions };
+  useEffect(() => {
+    if (data) {
+      refetchGifs();
+    }
+    return remove();
+  }, [data]);
+
+  const handleDelete = () => refetch()
+  
+
+  return { showDeleteOptions, handleDelete, handleToggleDeleteOptions, isLoading: isFetching || isLoading, error};
 };

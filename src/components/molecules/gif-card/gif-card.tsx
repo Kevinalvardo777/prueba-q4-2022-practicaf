@@ -3,11 +3,16 @@ import "./gif-card.scss";
 import { Button } from "../../atoms/button/button";
 import DeleteIcon from "../../../assets/delete-icon.svg";
 import { useGifCard } from "./use-gif-card/use-gif-card";
-import { Gif } from "../../../utils/interfaces/gif";
 
-export const GifCard: FC<Gif> = ({ id, url }) => {
+interface GifCardProps {
+  id: number, 
+  url: string, 
+  refetchGifs: () => void
+}
+
+export const GifCard: FC<GifCardProps> = ({ id, url, refetchGifs } ) => {
   const { showDeleteOptions, handleDelete, handleToggleDeleteOptions } =
-    useGifCard();
+    useGifCard({id, url, refetchGifs});
 
   return (
     <div className="gif-card gif-card__wrapper">
@@ -25,8 +30,6 @@ export const GifCard: FC<Gif> = ({ id, url }) => {
         src={url}
         alt={`gif #${id}`}
       />
-
-      {/* TODO: MODIFICAR BUTTON PARA BOTONES CIRCULARES */}
       <div className="gif-card__icon-btn-wrapper">
         <Button type="circular" onClick={handleToggleDeleteOptions}>
           <img
@@ -34,7 +37,6 @@ export const GifCard: FC<Gif> = ({ id, url }) => {
             src={DeleteIcon}
             alt="Delete icon"
           />
-          {/* texto */}
         </Button>
       </div>
     </div>

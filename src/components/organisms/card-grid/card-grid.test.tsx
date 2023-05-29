@@ -17,9 +17,8 @@ describe("CardGrid Tests", () => {
     ];
     const error = null;
     const refetch = jest.fn();
-    const remove = jest.fn();
 
-    render(<CardGrid gifs={gifs} error={error} />);
+    render(<CardGrid gifs={gifs} error={error} refetch={refetch}/>);
 
     await waitFor(async () => {
       const gifCards = await screen.findAllByRole("img", { name: /gif/ });
