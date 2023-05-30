@@ -7,8 +7,14 @@
     display: grid;
     padding: 0 20px;
     grid-gap: 20px;
-    max-width: 75vw;
+    width: 100%;
+    justify-content: center;
+    /*max-width: 75vw;*/
     margin: 20px auto;
     grid-template-columns: repeat(auto-fit, 300px);
+
+    @media screen and (max-width: 768px) {
+      padding: 50px 20px;
+    }
   }
 }

@@ -1,0 +1,36 @@
+.no-gifs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+
+    &__grid {
+        gap: 20px;
+        width: 100%;
+
+        @media screen and (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    
+
+        &--img {
+            width: 80px;
+            height: 80px;
+            padding: 0;
+        }
+    
+        &--text {
+            color: #ffff;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+   
+   
+}
