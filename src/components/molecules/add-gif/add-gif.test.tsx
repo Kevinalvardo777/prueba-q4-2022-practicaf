@@ -6,12 +6,14 @@ import { rest } from "msw";
 import { ADD_GIF_SERVICE } from "../../../utils/constants/services-constants";
 
 describe.only("Add Gif Component", () => {
+  
   it("should handle successful gif added and clear input", async () => {
     const refetch = jest.fn();
+    const displayAlert = jest.fn();
 
     const url = "http://www.mygif.com";
     const user = userEvent.setup();
-    render(<AddGif refetch={refetch} />);
+    render(<AddGif refetch={refetch} displayAlert={displayAlert}/>);
 
     const input = screen.getByPlaceholderText(/gift url/i);
     await user.type(input, url);
@@ -27,10 +29,11 @@ describe.only("Add Gif Component", () => {
 
   it("should handle wrong url", async () => {
     const refetch = jest.fn();
+    const displayAlert = jest.fn();
 
     const url = "ht://www.mygif.com";
     const user = userEvent.setup();
-    render(<AddGif refetch={refetch} />);
+    render(<AddGif refetch={refetch} displayAlert={displayAlert}/>);
 
     const input = screen.getByPlaceholderText(/gift url/i);
     await user.type(input, url);
@@ -47,14 +50,15 @@ describe.only("Add Gif Component", () => {
 
   it("should handle failed gif added", async () => {
     const refetch = jest.fn();
-
+    const displayAlert = jest.fn();
+    
     server.resetHandlers(
       rest.post(ADD_GIF_SERVICE, (_, res, ctx) => res(ctx.status(500)))
     );
 
     const url = "http://www.mygif.com";
     const user = userEvent.setup();
-    render(<AddGif refetch={refetch} />);
+    render(<AddGif refetch={refetch} displayAlert={displayAlert}/>);
 
     const input = screen.getByPlaceholderText(/gift url/i);
     await user.type(input, url);

@@ -5,9 +5,10 @@ import userEvent from "@testing-library/user-event";
 describe("Gif Card Test", () => {
   const url = "http://myimage.jpg";
   const refetch = jest.fn();
+  const displayAlert = jest.fn();
 
   it("should display gif image", () => {
-    render(<GifCard id={1} url={url} refetchGifs={refetch} />);
+    render(<GifCard id={1} url={url} refetchGifs={refetch} displayAlert={displayAlert} />);
 
     const gif = screen.getByRole("img", { name: "gif #1" });
     expect(gif).toHaveAttribute("src", url);
@@ -15,7 +16,7 @@ describe("Gif Card Test", () => {
 
   it("should display delete and cancel btns on click delete icon", async () => {
     const user = userEvent.setup();
-    render(<GifCard id={1} url={url} refetchGifs={refetch}/>);
+    render(<GifCard id={1} url={url} refetchGifs={refetch} displayAlert={displayAlert} />);
 
     const deleteWarningMsgHide = screen.queryByRole("heading", {
       name: /deseas eliminar/i,
@@ -39,7 +40,7 @@ describe("Gif Card Test", () => {
   it("should call delete gif petition on click delete btn", async () => {
     const user = userEvent.setup();
    
-    render(<GifCard id={1} url={url} refetchGifs={refetch} />);
+    render(<GifCard id={1} url={url} refetchGifs={refetch} displayAlert={displayAlert} />);
 
     const deleteIconBtn = screen.getByRole("button");
     await user.click(deleteIconBtn);
@@ -56,7 +57,7 @@ describe("Gif Card Test", () => {
 
   it("should hide button cover when click on cancel", async () => {
     const user = userEvent.setup();
-    render(<GifCard id={1} url={url} refetchGifs={refetch} />);
+    render(<GifCard id={1} url={url} refetchGifs={refetch} displayAlert={displayAlert} />);
 
     const deleteIconBtn = screen.getByRole("button");
     await user.click(deleteIconBtn);

@@ -1,0 +1,43 @@
+
+.alert {
+    &__wrapper {
+        height: 100px;
+        width: 400px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        position: absolute;
+        top: -100px;
+
+        animation: showalert 5s;
+
+        &--animation {
+        
+            @keyframes showalert {
+                0% { top: -100px; right: 15px; }
+                50% { top: 15px; }
+                100% { top: -100px; right: 15px; }
+            }
+        }
+
+    }
+
+    &__img {
+        margin: 0 15px;
+    }
+
+    &--success {
+        background: green;
+        border: 1px solid green;
+    }
+
+    &--error {
+        background: red;
+        border: 1px solid red;
+    }
+
+    &--hide {
+        display: none;
+    }
+}

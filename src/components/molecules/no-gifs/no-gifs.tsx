@@ -1,4 +1,3 @@
-import React from 'react'
 import WarningIcon from '../../../assets/warning-icon.svg'
 import './no-gifs.scss'
 

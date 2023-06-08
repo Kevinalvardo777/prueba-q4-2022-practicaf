@@ -4,15 +4,16 @@ import { createGif } from "../../../../services/gif-service/gif-service";
 
 interface useAddGifProps {
   refetchGifs: () => void;
+  displayAlert: (message: string, type: 'success' | 'error') => void
 }
 
-export const useAddGif = ({ refetchGifs }: useAddGifProps) => {
+export const useAddGif = ({ refetchGifs, displayAlert }: useAddGifProps) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const urlRegex =
     /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
-  const { isLoading, error, data, isFetching, refetch, remove } = useQuery(
+  const { error, data, isFetching, refetch, remove } = useQuery(
     ["addGif", inputValue],
     () => createGif({ url: inputValue }),
     { enabled: false, refetchOnWindowFocus: false }
@@ -26,6 +27,7 @@ export const useAddGif = ({ refetchGifs }: useAddGifProps) => {
   useEffect(() => {
     if (data) {
       setInputValue("");
+      displayAlert("mensaje exitoso", "success")
       refetchGifs();
     }
     return remove();
@@ -41,12 +43,13 @@ export const useAddGif = ({ refetchGifs }: useAddGifProps) => {
   const onChange = (value: string) => {
     setInputValue(value);
   };
+  
 
   return {
     onChange,
     handleSubmit,
     inputValue,
     errorMessage,
-    isLoading: isFetching || isLoading,
+    isLoading: isFetching,
   };
 };

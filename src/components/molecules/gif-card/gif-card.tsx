@@ -8,11 +8,12 @@ interface GifCardProps {
   id: number, 
   url: string, 
   refetchGifs: () => void
+  displayAlert: (message: string, type: 'success' | 'error') => void
 }
 
-export const GifCard: FC<GifCardProps> = ({ id, url, refetchGifs } ) => {
+export const GifCard: FC<GifCardProps> = ({ id, url, refetchGifs, displayAlert } ) => {
   const { showDeleteOptions, handleDelete, handleToggleDeleteOptions } =
-    useGifCard({id, url, refetchGifs});
+    useGifCard({id, url, refetchGifs, displayAlert});
 
   return (
     <div className="gif-card gif-card__wrapper">

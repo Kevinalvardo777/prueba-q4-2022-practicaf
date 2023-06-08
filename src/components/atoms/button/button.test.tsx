@@ -72,4 +72,15 @@ describe("Button Tests", () => {
     await user.click(button);
     expect(testFn).toHaveBeenCalledTimes(1);
   });
+
+  it("should show text if isLoading is true", () => {
+    render(
+      <Button loading={true} type="secondary" onClick={() => {}}>
+        hola
+      </Button>
+    );
+    const message = screen.getByText("cargando...")
+
+    expect(message).toBeInTheDocument();
+  });
 });

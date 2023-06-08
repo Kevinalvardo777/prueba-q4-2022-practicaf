@@ -6,16 +6,18 @@ import { deleteGif } from "../../../../services/gif-service/gif-service";
     id: number, 
     url: string, 
     refetchGifs: () => void
+    displayAlert: (message: string, type: 'success' | 'error') => void
+
   }
 
-export const useGifCard = ({id, url, refetchGifs}: UseGifCardProps) => {
+export const useGifCard = ({id, url, displayAlert, refetchGifs}: UseGifCardProps) => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(false);
 
   const handleToggleDeleteOptions = () => {
     setShowDeleteOptions((oldValue) => !oldValue);
   };
 
-  const { isLoading, error, data, isFetching, refetch, remove } = useQuery(
+  const { error, data, isFetching, refetch, remove } = useQuery(
     ["deleteGif", id, url],
     () => deleteGif({ id, url }),
     { enabled: false, refetchOnWindowFocus: false }
@@ -23,6 +25,7 @@ export const useGifCard = ({id, url, refetchGifs}: UseGifCardProps) => {
 
   useEffect(() => {
     if (data) {
+      displayAlert("eliminado exitosamente", "success")
       refetchGifs();
     }
     return remove();
@@ -31,5 +34,5 @@ export const useGifCard = ({id, url, refetchGifs}: UseGifCardProps) => {
   const handleDelete = () => refetch()
   
 
-  return { showDeleteOptions, handleDelete, handleToggleDeleteOptions, isLoading: isFetching || isLoading, error};
+  return { showDeleteOptions, handleDelete, handleToggleDeleteOptions, isLoading: isFetching, error};
 };

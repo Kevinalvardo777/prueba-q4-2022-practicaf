@@ -15,14 +15,30 @@ describe("CardGrid Tests", () => {
         author_id: 1,
       },
     ];
-    const error = null;
     const refetch = jest.fn();
+    const displayAlert = jest.fn();
 
-    render(<CardGrid gifs={gifs} error={error} refetch={refetch}/>);
+    render(<CardGrid gifs={gifs} refetch={refetch} displayAlert={displayAlert} />);
 
-    await waitFor(async () => {
-      const gifCards = await screen.findAllByRole("img", { name: /gif/ });
-      expect(gifCards.length).toEqual(2);
-    });
+    
+    const gifCards = screen.getAllByRole("img", { name: /gif/ });
+    expect(gifCards.length).toEqual(2);
+    
   });
+
+  it.only("should show no-gifs page if cards length is 0", async () => {
+    const gifs: any[] = [];
+    const refetch = jest.fn();
+    const displayAlert = jest.fn();
+
+    render(<CardGrid gifs={gifs} refetch={refetch} displayAlert={displayAlert} />);
+
+    
+      const gifCards = screen.queryAllByRole("img", { name: /gif/ });
+      const noGifCardsText = screen.getByText("No posee gifs")
+      expect(gifCards.length).toEqual(0);
+      expect(noGifCardsText).toBeInTheDocument();
+    
+  })
+
 });

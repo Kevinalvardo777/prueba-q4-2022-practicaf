@@ -7,11 +7,12 @@ import { Gif } from "../../../utils/interfaces/gif";
 
 interface AddGifProps extends PropsWithChildren {
   refetch: () => void;
+  displayAlert: (message: string, type: 'success' | 'error') => void
 }
 
-export const AddGif: FC<AddGifProps> = ({ refetch: refetchGifs }) => {
-  const { onChange, handleSubmit, inputValue, errorMessage } = useAddGif({
-    refetchGifs,
+export const AddGif: FC<AddGifProps> = ({ refetch: refetchGifs, displayAlert }) => {
+  const { onChange, handleSubmit, inputValue, errorMessage, isLoading,  } = useAddGif({
+    refetchGifs, displayAlert
   });
 
   return (
@@ -24,7 +25,7 @@ export const AddGif: FC<AddGifProps> = ({ refetch: refetchGifs }) => {
           onChange={onChange}
           placeholder="Gift URL"
         />
-        <Button onClick={handleSubmit}>Agregar</Button>
+        <Button onClick={handleSubmit} loading={isLoading}>Agregar</Button>
       </section>
     </div>
   );
